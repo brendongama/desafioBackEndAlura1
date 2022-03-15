@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -39,10 +40,15 @@ public class ReceitaController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Receita>> findAll(){
-		List<Receita> receitas = receitaService.findAll();
+	public ResponseEntity<List<Receita>> findAll(@RequestParam(required = false) String descricao){
+		List<Receita> receitas;
+		if(null == descricao) {
+			receitas = receitaService.findAll();
+		}else {
+			receitas = receitaService.findByDescricao(descricao);
+		}		
 		return ResponseEntity.ok().body(receitas);
-	}
+	} 
 	 
 	@GetMapping(value = "descricao/{descricao}")
 	public ResponseEntity<List<Receita>> findByDescricao(@PathVariable String descricao){

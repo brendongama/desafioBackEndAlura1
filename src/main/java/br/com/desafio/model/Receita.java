@@ -23,10 +23,10 @@ public class Receita {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank
-	private String descricao;	
-
-	@NotNull
+	@NotBlank(message = "Descrição não pode ser vazio ou nulo")
+	private String descricao;
+	
+	@NotNull(message = "Valor não pode ser vazio ou nulo")
 	private Double valor;
 
 	private LocalDate data;

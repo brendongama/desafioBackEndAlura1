@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,12 +23,14 @@ public class Despesa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank
+	@NotBlank(message = "Descrição não pode ser vazio ou nulo")
 	private String descricao;
 	
-	@NotBlank
+	@NotNull(message = "Valor não pode ser vazio ou nulo")
 	private Double valor;
 	
-	@NotBlank
 	private LocalDate data;
+	
+	private Categoria categoria;
 }
+ 
